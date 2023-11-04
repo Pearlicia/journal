@@ -1,4 +1,4 @@
-Question: 735. Asteroid Collision
+### Question: 735. Asteroid Collision
 
 **Medium**
 
@@ -38,7 +38,7 @@ Constraints:
 asteroids[i] != 0
 
 
-Answer:
+### Answer:
 Python implementation using Object-Oriented Programming (OOP) principles to solve the "Asteroid Collision" problem:
 ```python
 class AsteroidCollision:
@@ -69,6 +69,32 @@ print(AsteroidCollision.asteroidCollision(asteroids3))  # Output: [10]
 
 ```
 This code defines a class AsteroidCollision with a static method asteroidCollision that implements the logic for finding the state of the asteroids after all collisions. The method uses a stack to simulate the collisions between asteroids, and the final state of the asteroids is returned based on the collision rules provided in the problem description.
+
+### Explanation 
+
+```python
+class AsteroidCollision:
+    @staticmethod
+    def asteroidCollision(asteroids):
+        stack = []  # We create an empty space to store our rocks.
+
+        for asteroid in asteroids:  # We look at each rock in our line of rocks.
+            while stack and asteroid < 0 < stack[-1]:  # If a rock is moving left and the one in the stack is moving right:
+                if stack[-1] < -asteroid:  # If the rock in the stack is smaller than the current left-moving rock:
+                    stack.pop()  # The smaller rock gets destroyed and disappears.
+                    continue  # We go back to looking at the next rock in the stack.
+                elif stack[-1] == -asteroid:  # If they are the same size:
+                    stack.pop()  # Both rocks get destroyed.
+                break  # We stop looking at these two rocks.
+
+            else:  # If the rocks are not meeting each other:
+                stack.append(asteroid)  # We add the rock to the line-up.
+
+        return stack  # At the end, we show the rocks that are left after all the crashing.
+
+```
+
+This code creates a process to manage and decide what happens when rocks, which are moving in different directions, meet each other in a line. It goes through each rock and decides their fate based on the rules given in the explanation, finally showing us which rocks are left after they meet and crash.
 
 
 
