@@ -1,9 +1,7 @@
-Question: 
-735. Asteroid Collision
-Medium
-7.3K
-825
-Companies
+Question: 735. Asteroid Collision
+
+**Medium**
+
 We are given an array asteroids of integers representing asteroids in a row.
 
 For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.
@@ -32,7 +30,9 @@ Explanation: The 2 and -5 collide resulting in -5. The 10 and -5 collide resulti
 Constraints:
 
 2 <= asteroids.length <= 104
+
 -1000 <= asteroids[i] <= 1000
+
 asteroids[i] != 0
 
 
