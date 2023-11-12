@@ -1,4 +1,41 @@
 
+
+
+
+
+A company uses one AWS account to run production workloads. The company has a separate AWS account for its security team. During periodic audits, the security team needs to view specific account settings and resource configurations in the AWS account that runs production workloads. A solutions architect must provide the required access to the security team by designing a solution that follows AWS security best practices.
+
+Which solution will meet these requirements?
+
+Report Content Errors
+
+A
+Create an IAM user for each security team member in the production account. Attach a permissions policy that provides the permissions required by the security team to each user.
+Incorrect. This solution does not follow the security best practice of using roles to delegate permissions.
+
+For more information about how to use roles to delegate permissions, see Use roles to delegate permissions.
+
+
+B
+Create an IAM role in the production account. Attach a permissions policy that provides the permissions required by the security team. Add the security team account to the trust policy.
+Correct. This solution follows security best practices by using a role to delegate permissions that consist of least privilege access.
+
+For more information about how to use roles to delegate permissions, see Use roles to delegate permissions.
+
+
+C
+Create a new IAM user in the production account. Assign administrative privileges to the user. Allow the security team to use this account to log in to the systems that need to be accessed.
+Incorrect. The assignment of administrative privileges to a user violates security best practices and the principle of least privilege.
+
+For more information about how to grant least privilege in roles, see Grant least privilege.
+
+
+D
+Create an IAM user for each security team member in the production account. Attach a permissions policy that provides the permissions required by the security team to a new IAM group. Assign the security team members to the group.
+Incorrect. This solution does not follow the security best practice of using roles to delegate permissions.
+
+For more information about how to use roles to delegate permissions, see Use roles to delegate permissions.
+
 Skip to main content
 7
  
