@@ -408,5 +408,57 @@ Correct Answer:
 A
 Continue
  Close
+
+
+Skip to main content
+
+ 
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 00:40
+ Total: 21:31
+Pause Exam
+12/20
+55.0% complete
+Question
+A company is investigating services to manage vulnerability scans in Amazon EC2 instances and container images that the company stores in Amazon Elastic Container Registry (Amazon ECR). The service should identify potential software vulnerabilities and categorize the severity of the vulnerabilities.
+
+Which AWS service will meet these requirements?
+
+Report Content Errors
+
+A
+Amazon GuardDuty
+Incorrect. Amazon GuardDuty is a threat detection service that continuously monitors for malicious activity and anomalous behavior. It does not scan for vulnerabilities.
+
+For more information about threat detection services, see Amazon GuardDuty Features.
+
+
+B
+Patch Manager, a capability of AWS Systems Manager
+Incorrect. You can use Patch Manager to apply patches for operating systems and applications. This does not satisfy the requirement to scan EC2 instances and containers for vulnerabilities.
+
+For more information about automated patch management, see AWS Systems Manager Patch Manager.
+
+
+C
+Amazon Inspector
+Correct. Amazon Inspector removes the operational overhead that is necessary to configure a vulnerability management solution. Amazon Inspector works with both EC2 instances and container images in Amazon ECR to identify potential software vulnerabilities and to categorize the severity of the vulnerabilities.
+
+For more information about automated vulnerability management, see Amazon Inspector Features.
+
+
+D
+AWS Config
+Incorrect. AWS Config is a service that gives you the ability to assess, audit, and evaluate the configurations of your AWS resources. It does not scan for vulnerabilities or network exposures.
+
+For more information about how to evaluate the configurations of your AWS resources, see AWS Config.
+
+Correct
+Your Answer:
+C
+Correct Answer:
+C
+Continue
+ Close
 Legal Privacy Support
 ©2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
