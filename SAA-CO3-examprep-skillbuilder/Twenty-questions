@@ -1,7 +1,38 @@
 
 
 
+An application runs on two Amazon EC2 instances behind a Network Load Balancer. The EC2 instances are in a single Availability Zone.
 
+What should a solutions architect do to make this architecture more highly available?
+
+Report Content Errors
+
+A
+Create a new VPC with two new EC2 instances in the same Availability Zone as the original EC2 instances. Create a VPC peering connection between the two VPCs
+Incorrect. VPC peering will provide connectivity to the other Availability Zone. However, VPC peering does not ensure high availability because the EC2 instances are still in one Availability Zone.
+
+For more information about VPC peering, see What is VPC Peering?
+
+
+B
+Replace the Network Load Balancer with an Application Load Balancer that is configured with the EC2 instances in an Auto Scaling group.
+Incorrect. The replacement of the Network Load Balancer with an Application Load Balancer provides no additional availability. Both load balancers are inherently highly available. However, the EC2 instances would be highly available only if they extended across two Availability Zones.
+
+For more information about Elastic Load Balancing, see How Elastic Load Balancing works.
+
+
+C
+Configure Amazon Route 53 to perform health checks on the EC2 instances behind the Network Load Balancer. Add a failover routing policy.
+Incorrect. Failover routing requires a primary destination and a secondary (failover) destination. No failover destination is specified in this solution. In addition, this approach does not ensure high availability because the EC2 instances are still in one Availability Zone.
+
+For more information about DNS failover, see Configuring DNS failover.
+
+
+D
+Place the EC2 instances in an Auto Scaling group that extends across multiple Availability Zones. Designate the Auto Scaling group as the target of the Network Load Balancer.
+Correct. This solution extends the EC2 instances across multiple Availability Zones and automatically adds capacity when additional capacity is needed.
+
+For more information about Amazon EC2 Auto Scaling, see Amazon EC2 Auto Scaling benefits.
 
 
 
