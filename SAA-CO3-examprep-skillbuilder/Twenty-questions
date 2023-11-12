@@ -3,6 +3,50 @@
 
 
 
+
+
+
+A company has strict data protection requirements. A solutions architect must configure security for a VPC to ensure that backend Amazon RDS DB instances cannot be accessed from the internet. The solutions architect must ensure that the DB instances are accessible from the application tier over a specified port only.
+
+Which actions should the solutions architect take to meet these requirements? (Select TWO.)
+
+Report Content Errors
+
+A
+Specify a DB subnet group that contains only private subnets for the DB instances.
+Correct. A private subnet is one component to use to secure the database tier. Internet traffic is not routed to a private subnet. When you place DB instances in a private subnet, you add a layer of security.
+
+For more information about VPCs with public subnets and private subnets, see Routing.
+
+
+B
+Attach an elastic network interface with a private IPv4 address to each DB instance.
+Incorrect. An elastic network interface is a logical networking component in a VPC that represents a virtual network card. The use of an elastic network interface would not meet the requirements in the scenario.
+
+For more information about elastic network interfaces, see Elastic network interfaces.
+
+
+C
+Configure AWS Shield with the VPC. Update the route tables for the subnets that the DB instances use.
+Incorrect. Shield provides protection against DDoS attacks. Shield cannot be a target of routes in a route table. The use of Shield would not meet the requirements in the scenario.
+
+For more information about Shield, see AWS Shield.
+
+
+D
+Configure an AWS Direct Connect connection on the database port between the application tier and the backend.
+Incorrect. Direct Connect provides a dedicated connection to your AWS environment. The use of Direct Connect would not meet the requirements in the scenario.
+
+For more information about Direct Connect, see AWS Direct Connect features.
+
+
+E
+Add an inbound rule to the database security group that allows requests from the security group of the application tier over the database port. Remove other inbound rules.
+Correct. Security groups can restrict access to the DB instances. Security groups provide access from only the application tier on only a specific port.
+
+For more information about security groups, see Security group basics.
+
+
 A company uses one AWS account to run production workloads. The company has a separate AWS account for its security team. During periodic audits, the security team needs to view specific account settings and resource configurations in the AWS account that runs production workloads. A solutions architect must provide the required access to the security team by designing a solution that follows AWS security best practices.
 
 Which solution will meet these requirements?
