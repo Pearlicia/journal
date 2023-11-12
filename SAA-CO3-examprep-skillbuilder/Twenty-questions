@@ -1,6 +1,6 @@
 
 Skip to main content
-
+7
  
 AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
  This Question: 02:15
@@ -462,3 +462,37 @@ Continue
  Close
 Legal Privacy Support
 ©2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+A company needs to look up configuration details about how a Linux-based Amazon EC2 instance was launched.
+
+Which command should a solutions architect run on the EC2 instance to gather the system metadata?
+
+Report Content Errors
+
+A
+curl http://169.254.169.254/latest/meta-data
+Correct. The only way to retrieve instance metadata is to use the link-local address, which is 169.254.169.254.
+
+For more information about instance metadata, see Retrieve instance metadata.
+
+
+B
+curl http://localhost/latest/meta-data
+Incorrect. The use of localhost will not work because this solution checks an IP address of 127.0.0.1. Metadata is not available through the use of the localhost name.
+
+For more information about instance metadata, see Retrieve instance metadata.
+
+
+C
+curl http://254.169.254.169/latest/meta-data
+Incorrect. The format for the link-local address is 169.254.169.254.
+
+For more information about instance metadata, see Retrieve instance metadata.
+
+
+D
+curl http://192.168.0.1/latest/meta-data
+Incorrect. The 192.168.x.x. IP address range is a public block. Instance metadata is not available through a public block.
+
+For more information about instance metadata, see Retrieve instance metadata.
