@@ -28,5 +28,64 @@ D
 Create an Amazon CloudFront distribution for the objects in the existing S3 bucket. Download the objects from CloudFront to the on-premises location every month.
 Confirm
  Close
+correct answer is A.
+
+
+Skip to main content
+
+ 
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 01:16
+ Total: 07:26
+Pause Exam
+2/20
+5.0% complete
+Question
+Which components are required to build a site-to-site VPN connection on AWS? (Select TWO.)
+Report Content Errors
+
+A
+An internet gateway
+Incorrect. An internet gateway is attached to a VPC to allow traffic from the internet to flow into or out of the VPC. A VPN connection does not flow through an internet gateway. The internet gateway is designed to allow traffic from the open internet, not an encrypted VPN connection.
+
+For more information about internet gateways, see Internet gateways.
+
+
+B
+A NAT gateway
+Incorrect. A NAT gateway provides a way for private Amazon EC2 instances to send requests to the internet. A NAT gateway does not give you the ability to create an encrypted site-to-site VPN connection.
+
+For more information about NAT gateways, see NAT gateways.
+
+For more information about VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+
+C
+A customer gateway
+Correct. A customer gateway is required for the VPN connection to be established. A customer gateway device is set up and configured in the customer's data center.
+
+For more information about customer gateways and VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+
+D
+Amazon API Gateway
+Incorrect. API Gateway is a fully managed service for developers to create, publish, maintain, monitor, and secure APIs at any scale. APIs act as the front door for applications to use to access data, business logic, or functionality from backend services. However, API Gateway is not necessary for the implementation of a VPN connection.
+
+For more information about API Gateway, see What is Amazon API Gateway?
+
+
+E
+A virtual private gateway
+Correct. A virtual private gateway is attached to a VPC to create a site-to-site VPN connection on AWS. You can accept private encrypted network traffic from an on-premises data center into your VPC without the need to traverse the open public internet.
+
+For more information about virtual private gateways and VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+Incorrect
+Your Answer:
+AB
+Correct Answer:
+CE
+Continue
+ Close
 Legal Privacy Support
 ©2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
