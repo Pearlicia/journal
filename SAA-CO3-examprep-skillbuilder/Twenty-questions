@@ -89,3 +89,324 @@ Continue
  Close
 Legal Privacy Support
 ©2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Skip to main content
+
+ 
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 02:15
+ Total: 02:15
+Pause Exam
+1/20
+0.0% complete
+Question
+A company that processes satellite images has an application that runs on AWS. The company stores the images in an Amazon S3 bucket. For compliance reasons, the company must replicate all data once a month to an on-premises location. The average amount of data that the company needs to transfer is 60 TB.
+
+What is the MOST cost-effective way to transfer this data?
+
+Report Content Errors
+
+A
+Export the data monthly from the existing S3 bucket to an AWS Snowball Edge Storage Optimized device. Ship the device to the on-premises location. Transfer the data. Return the device a week later.
+
+B
+Use S3 bucket replication to copy all objects to a new S3 bucket that uses S3 Standard-Infrequent Access (S3 Standard-IA) storage. Use an AWS Storage Gateway File Gateway to transfer the data from the new S3 bucket to the on-premises location. Delete the images from the new S3 bucket after the transfer of the data.
+
+C
+Use S3 bucket replication to copy all objects to a new S3 bucket that uses S3 Standard-Infrequent Access (S3 Standard-IA) storage. Use Amazon S3 to transfer the data from the new S3 bucket to the on-premises location. Delete the images from the new S3 bucket after the transfer of the data.
+
+D
+Create an Amazon CloudFront distribution for the objects in the existing S3 bucket. Download the objects from CloudFront to the on-premises location every month.
+Confirm
+ Close
+correct answer is A.
+
+
+Skip to main content
+
+ 
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 01:16
+ Total: 07:26
+Pause Exam
+2/20
+5.0% complete
+Question
+Which components are required to build a site-to-site VPN connection on AWS? (Select TWO.)
+Report Content Errors
+
+A
+An internet gateway
+Incorrect. An internet gateway is attached to a VPC to allow traffic from the internet to flow into or out of the VPC. A VPN connection does not flow through an internet gateway. The internet gateway is designed to allow traffic from the open internet, not an encrypted VPN connection.
+
+For more information about internet gateways, see Internet gateways.
+
+
+B
+A NAT gateway
+Incorrect. A NAT gateway provides a way for private Amazon EC2 instances to send requests to the internet. A NAT gateway does not give you the ability to create an encrypted site-to-site VPN connection.
+
+For more information about NAT gateways, see NAT gateways.
+
+For more information about VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+
+C
+A customer gateway
+Correct. A customer gateway is required for the VPN connection to be established. A customer gateway device is set up and configured in the customer's data center.
+
+For more information about customer gateways and VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+
+D
+Amazon API Gateway
+Incorrect. API Gateway is a fully managed service for developers to create, publish, maintain, monitor, and secure APIs at any scale. APIs act as the front door for applications to use to access data, business logic, or functionality from backend services. However, API Gateway is not necessary for the implementation of a VPN connection.
+
+For more information about API Gateway, see What is Amazon API Gateway?
+
+
+E
+A virtual private gateway
+Correct. A virtual private gateway is attached to a VPC to create a site-to-site VPN connection on AWS. You can accept private encrypted network traffic from an on-premises data center into your VPC without the need to traverse the open public internet.
+
+For more information about virtual private gateways and VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+Incorrect
+Your Answer:
+AB
+Correct Answer:
+CE
+Continue
+ Close
+Legal Privacy Support
+©2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Skip to main content
+
+ 
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 02:15
+ Total: 02:15
+Pause Exam
+1/20
+0.0% complete
+Question
+A company that processes satellite images has an application that runs on AWS. The company stores the images in an Amazon S3 bucket. For compliance reasons, the company must replicate all data once a month to an on-premises location. The average amount of data that the company needs to transfer is 60 TB.
+
+What is the MOST cost-effective way to transfer this data?
+
+Report Content Errors
+
+A
+Export the data monthly from the existing S3 bucket to an AWS Snowball Edge Storage Optimized device. Ship the device to the on-premises location. Transfer the data. Return the device a week later.
+
+B
+Use S3 bucket replication to copy all objects to a new S3 bucket that uses S3 Standard-Infrequent Access (S3 Standard-IA) storage. Use an AWS Storage Gateway File Gateway to transfer the data from the new S3 bucket to the on-premises location. Delete the images from the new S3 bucket after the transfer of the data.
+
+C
+Use S3 bucket replication to copy all objects to a new S3 bucket that uses S3 Standard-Infrequent Access (S3 Standard-IA) storage. Use Amazon S3 to transfer the data from the new S3 bucket to the on-premises location. Delete the images from the new S3 bucket after the transfer of the data.
+
+D
+Create an Amazon CloudFront distribution for the objects in the existing S3 bucket. Download the objects from CloudFront to the on-premises location every month.
+Confirm
+ Close
+correct answer is A.
+
+
+Skip to main content
+
+ 
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 01:16
+ Total: 07:26
+Pause Exam
+2/20
+5.0% complete
+Question
+Which components are required to build a site-to-site VPN connection on AWS? (Select TWO.)
+Report Content Errors
+
+A
+An internet gateway
+Incorrect. An internet gateway is attached to a VPC to allow traffic from the internet to flow into or out of the VPC. A VPN connection does not flow through an internet gateway. The internet gateway is designed to allow traffic from the open internet, not an encrypted VPN connection.
+
+For more information about internet gateways, see Internet gateways.
+
+
+B
+A NAT gateway
+Incorrect. A NAT gateway provides a way for private Amazon EC2 instances to send requests to the internet. A NAT gateway does not give you the ability to create an encrypted site-to-site VPN connection.
+
+For more information about NAT gateways, see NAT gateways.
+
+For more information about VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+
+C
+A customer gateway
+Correct. A customer gateway is required for the VPN connection to be established. A customer gateway device is set up and configured in the customer's data center.
+
+For more information about customer gateways and VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+
+D
+Amazon API Gateway
+Incorrect. API Gateway is a fully managed service for developers to create, publish, maintain, monitor, and secure APIs at any scale. APIs act as the front door for applications to use to access data, business logic, or functionality from backend services. However, API Gateway is not necessary for the implementation of a VPN connection.
+
+For more information about API Gateway, see What is Amazon API Gateway?
+
+
+E
+A virtual private gateway
+Correct. A virtual private gateway is attached to a VPC to create a site-to-site VPN connection on AWS. You can accept private encrypted network traffic from an on-premises data center into your VPC without the need to traverse the open public internet.
+
+For more information about virtual private gateways and VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+Incorrect
+Your Answer:
+AB
+Correct Answer:
+CE
+Continue
+ Close
+Legal Privacy Support
+©2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+Skip to main content
+
+ 
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 02:15
+ Total: 02:15
+Pause Exam
+1/20
+0.0% complete
+Question
+A company that processes satellite images has an application that runs on AWS. The company stores the images in an Amazon S3 bucket. For compliance reasons, the company must replicate all data once a month to an on-premises location. The average amount of data that the company needs to transfer is 60 TB.
+
+What is the MOST cost-effective way to transfer this data?
+
+Report Content Errors
+
+A
+Export the data monthly from the existing S3 bucket to an AWS Snowball Edge Storage Optimized device. Ship the device to the on-premises location. Transfer the data. Return the device a week later.
+
+B
+Use S3 bucket replication to copy all objects to a new S3 bucket that uses S3 Standard-Infrequent Access (S3 Standard-IA) storage. Use an AWS Storage Gateway File Gateway to transfer the data from the new S3 bucket to the on-premises location. Delete the images from the new S3 bucket after the transfer of the data.
+
+C
+Use S3 bucket replication to copy all objects to a new S3 bucket that uses S3 Standard-Infrequent Access (S3 Standard-IA) storage. Use Amazon S3 to transfer the data from the new S3 bucket to the on-premises location. Delete the images from the new S3 bucket after the transfer of the data.
+
+D
+Create an Amazon CloudFront distribution for the objects in the existing S3 bucket. Download the objects from CloudFront to the on-premises location every month.
+Confirm
+ Close
+correct answer is A.
+
+
+Skip to main content
+
+ 
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 01:16
+ Total: 07:26
+Pause Exam
+2/20
+5.0% complete
+Question
+Which components are required to build a site-to-site VPN connection on AWS? (Select TWO.)
+Report Content Errors
+
+A
+An internet gateway
+Incorrect. An internet gateway is attached to a VPC to allow traffic from the internet to flow into or out of the VPC. A VPN connection does not flow through an internet gateway. The internet gateway is designed to allow traffic from the open internet, not an encrypted VPN connection.
+
+For more information about internet gateways, see Internet gateways.
+
+
+B
+A NAT gateway
+Incorrect. A NAT gateway provides a way for private Amazon EC2 instances to send requests to the internet. A NAT gateway does not give you the ability to create an encrypted site-to-site VPN connection.
+
+For more information about NAT gateways, see NAT gateways.
+
+For more information about VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+
+C
+A customer gateway
+Correct. A customer gateway is required for the VPN connection to be established. A customer gateway device is set up and configured in the customer's data center.
+
+For more information about customer gateways and VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+
+D
+Amazon API Gateway
+Incorrect. API Gateway is a fully managed service for developers to create, publish, maintain, monitor, and secure APIs at any scale. APIs act as the front door for applications to use to access data, business logic, or functionality from backend services. However, API Gateway is not necessary for the implementation of a VPN connection.
+
+For more information about API Gateway, see What is Amazon API Gateway?
+
+
+E
+A virtual private gateway
+Correct. A virtual private gateway is attached to a VPC to create a site-to-site VPN connection on AWS. You can accept private encrypted network traffic from an on-premises data center into your VPC without the need to traverse the open public internet.
+
+For more information about virtual private gateways and VPN connections to AWS, see What is AWS Site-to-Site VPN?
+
+Incorrect
+Your Answer:
+AB
+Correct Answer:
+CE
+Continue
+ Close
+Legal Privacy Support
+©2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+Skip to main content
+
+ 
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 03:52
+ Total: 20:51
+Pause Exam
+11/20
+50.0% complete
+Question
+A company is designing a disaster recovery (DR) architecture for an important application on AWS. The company has determined that the RTO is 5 minutes with a minimal instance capacity to support the application in the AWS DR site. The company needs to minimize costs for the DR architecture.
+
+Which DR strategy will meet these requirements?
+
+Report Content Errors
+
+A
+Warm standby
+Correct. This solution meets the requirement for an RTO of 5 minutes. The instances run at a low capacity and can scale within minutes.
+
+For more information about warm standby, see Plan for Disaster Recovery (DR).
+
+
+B
+Pilot light
+Incorrect. This solution would not meet the requirement for an RTO of 5 minutes. The instances are idle and unable to run and scale to full capacity within 5 minutes.
+
+
+C
+Multi-site active-active
+Incorrect. Because this is an active-active environment, this solution would address the requirement for an RTO within moments. The services are already running at full capacity within that time. However, this solution costs more than is necessary to meet the company's requirements.
+
+
+D
+Backup and restore
+Incorrect. This solution would not achieve the RTO of 5 minutes that the company requires.
+
+Incorrect
+Your Answer:
+B
+Correct Answer:
+A
+Continue
+ Close
+Legal Privacy Support
+©2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
