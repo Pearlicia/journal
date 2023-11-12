@@ -1,0 +1,32 @@
+
+Skip to main content
+
+ 
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 02:15
+ Total: 02:15
+Pause Exam
+1/20
+0.0% complete
+Question
+A company that processes satellite images has an application that runs on AWS. The company stores the images in an Amazon S3 bucket. For compliance reasons, the company must replicate all data once a month to an on-premises location. The average amount of data that the company needs to transfer is 60 TB.
+
+What is the MOST cost-effective way to transfer this data?
+
+Report Content Errors
+
+A
+Export the data monthly from the existing S3 bucket to an AWS Snowball Edge Storage Optimized device. Ship the device to the on-premises location. Transfer the data. Return the device a week later.
+
+B
+Use S3 bucket replication to copy all objects to a new S3 bucket that uses S3 Standard-Infrequent Access (S3 Standard-IA) storage. Use an AWS Storage Gateway File Gateway to transfer the data from the new S3 bucket to the on-premises location. Delete the images from the new S3 bucket after the transfer of the data.
+
+C
+Use S3 bucket replication to copy all objects to a new S3 bucket that uses S3 Standard-Infrequent Access (S3 Standard-IA) storage. Use Amazon S3 to transfer the data from the new S3 bucket to the on-premises location. Delete the images from the new S3 bucket after the transfer of the data.
+
+D
+Create an Amazon CloudFront distribution for the objects in the existing S3 bucket. Download the objects from CloudFront to the on-premises location every month.
+Confirm
+ Close
+Legal Privacy Support
+©2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
