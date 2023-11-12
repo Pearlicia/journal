@@ -1,7 +1,40 @@
 
 
 
+A company needs to maintain data records for a minimum of 5 years. The data is rarely accessed after it is stored. The data must be accessible within 2 hours.
 
+Which solution will meet these requirements MOST cost-effectively?
+
+Report Content Errors
+
+A
+Store the data in an Amazon Elastic File System (Amazon EFS) file system. Access the data by using AWS Direct Connect.
+Incorrect. This solution is not the most cost-effective solution. Amazon S3 is a more cost-effective solution if there is not a requirement for a file system.
+
+For more information about Amazon EFS and Direct Connect, see How Amazon EFS works with AWS Direct Connect and AWS Managed VPN.
+
+
+B
+Store the data in an Amazon Elastic Block Store (Amazon EBS) volume. Create snapshots. Store the snapshots in an Amazon S3 bucket.
+Incorrect. This solution is not the most cost-effective solution because it requires the use of Amazon EBS in addition to Amazon S3.
+
+For more information about EBS snapshots, see Amazon EBS snapshots.
+
+
+C
+Store the data in an Amazon S3 bucket. Use an S3 Lifecycle policy to move the data to S3 Standard-Infrequent Access (S3 Standard-IA).
+Incorrect. The storage of the data in an S3 bucket provides a cost-effective initial location for the data. However, S3 Standard-IA is not the most cost-effective storage class to meet the requirements in the scenario. The S3 Glacier storage class is designed for low-cost data archiving.
+
+For more information about S3 storage classes, see Using Amazon S3 storage classes.
+
+
+D
+Store the data in an Amazon S3 bucket. Use an S3 Lifecycle policy to move the data to S3 Glacier Instant Retrieval.
+Correct. The storage of the data in an S3 bucket provides a cost-effective initial location for the data. S3 Glacier Instant Retrieval is the most cost-effective archival storage solution that meets the requirement of a 2-hour retrieval time.
+
+For more information about how to move data between S3 storage classes automatically, see Managing your storage lifecycle.
+
+For more information about S3 storage classes, see Using Amazon S3 storage classes.
 
 
 
