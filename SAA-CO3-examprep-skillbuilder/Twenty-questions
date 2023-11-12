@@ -496,3 +496,49 @@ curl http://192.168.0.1/latest/meta-data
 Incorrect. The 192.168.x.x. IP address range is a public block. Instance metadata is not available through a public block.
 
 For more information about instance metadata, see Retrieve instance metadata.
+
+
+AWS Certified Solutions Architect – Associate Official Practice Question Set (SAA-C03)
+ This Question: 01:25
+ Total: 23:50
+Pause Exam
+14/20
+65.0% complete
+Question
+A company has an application that runs on a large general purpose Amazon EC2 instance type that is part of an EC2 Auto Scaling group. The company wants to reduce future costs associated with this application. After the company reviews metrics and logs in Amazon CloudWatch, the company notices that this application runs randomly a couple of times a day to retrieve and manage data. According to CloudWatch, the maximum runtime for each request is 10 minutes, the memory use is 4 GB, and the instances are always in the running state.
+
+Which solution will reduce costs the MOST?
+
+Report Content Errors
+
+A
+Deploy the application on a large burstable EC2 instance.
+Incorrect. This solution would keep the EC2 instance in the running state 24 hours a day. This solution would not reduce costs.
+
+For more information about EC2 costs, see Amazon EC2 On-Demand Pricing.
+
+
+B
+Refactor the application code to run as an AWS Lambda function.
+Correct. Lambda is a fully managed service that would automatically scale when necessary and would be highly available. A solution that deploys the application as a Lambda function reduces costs the most.
+
+For more information about Lambda, see What Is AWS Lambda?
+
+
+C
+Containerize the application by using Amazon Elastic Kubernetes Service (Amazon EKS). Host the container on EC2 instances.
+Incorrect. This solution would not reduce costs because this solution would still require EC2 instances to be in the running state beyond the run duration of each request.
+
+For more information about Amazon EKS, see Amazon Elastic Kubernetes Service.
+
+
+D
+Use AWS Instance Scheduler to start and stop the instances based on the runtimes in the logs.
+Incorrect. This solution would not be appropriate because the request times are unpredictable. This solution would create scenarios where the application would not be available because instance launches are not correctly scheduled. This solution would also incur unnecessary costs because the company would be charged on an hourly basis for the EC2 instances instead of on the basis of exact runtimes.
+
+For more information about AWS Instance Scheduler, see Instance Scheduler on AWS.
+
+
+
+
+
