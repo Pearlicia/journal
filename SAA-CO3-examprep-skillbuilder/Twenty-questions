@@ -4,6 +4,41 @@
 
 
 
+
+
+A company is transitioning its Amazon EC2 based MariaDB database to Amazon RDS. The company has already identified a database instance type that will meet the company's CPU and memory requirements. The database must provide at least 40 GiB of storage capacity and 1,000 IOPS.
+
+Which storage configuration for the Amazon RDS for MariaDB instance is MOST cost-effective?
+
+Report Content Errors
+
+A
+Provision 350 GiB of magnetic storage for the RDS instance.
+Incorrect. Magnetic storage does not support IOPS as a configurable parameter.
+
+For more information about magnetic storage, see Amazon RDS Storage Types.
+
+
+B
+Provision 50 GiB of General Purpose SSD storage for the RDS instance.
+Incorrect. Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, with a minimum of 100 IOPS. For 50 GiB of storage, the baseline performance would be 150 IOPS.
+
+
+C
+Provision 334 GiB of General Purpose SSD storage for the RDS instance.
+Correct. Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB. For 334 GiB of storage, the baseline performance would be 1,002 IOPS. Additionally, General Purpose SSD storage is more cost-effective than Provisioned IOPS storage.
+
+For more information about General Purpose SSD storage, see General Purpose SSD Storage.
+
+For more information about Amazon RDS costs, see Amazon RDS for MariaDB Pricing.
+
+
+D
+Provision 50 GiB of Provisioned IOPS storage with 1,000 IOPS for the RDS instance.
+Incorrect. 50 GiB of Provisioned IOPS storage with 1,000 IOPS would be more expensive than 334 GiB of General Purpose SSD storage.
+
+
+
 A reporting application runs on Amazon EC2 instances behind an Application Load Balancer. The instances run in an Amazon EC2 Auto Scaling group across multiple Availability Zones. For complex reports, the application can take up to 15 minutes to respond to a request. A solutions architect is concerned that users will receive HTTP 5xx errors if a report request is in process during a scale-in event.
 
 What should the solutions architect do to ensure that user requests will be completed before instances are terminated?
