@@ -1,991 +1,284 @@
 # Kubernetes 
-Kubernetes is the most popular container orchestration
+Kubernetes stands out as the leading container orchestration tool. We've successfully deployed numerous containers so far, all managed within a single Docker engine. However, the potential risk arises when this singular Docker engine encounters a failure.
 
-tool and we'll understand what it is
+In the unfortunate event of a Docker engine failure, all containers hosted within that engine will inevitably go offline, rendering them inaccessible to users.
 
-and why it is so famous.
+Anticipating this concern, you might be contemplating implementing high availability by deploying multiple Docker engines. And you're absolutely correct; for production environments, it's crucial to establish a cluster of Docker engines.
 
-So we have run so many containers us so far, and
+This involves not just a singular Docker node but multiple Docker nodes. Additionally, a master node is indispensable in orchestrating and overseeing the activities of these Docker nodes, ensuring coordinated and efficient management of the containerized workloads. This clustering approach enhances the reliability and resilience of the overall system, mitigating the impact of potential failures on the availability of applications.
 
-all the containers were running in one single docker engine.
+The master node takes charge of instructing the Docker nodes on which containers to run. Its primary responsibility is to efficiently distribute containers across the Docker nodes, stepping in seamlessly if any of the Docker nodes encounters a failure.
 
-But what if that docker engine fails?
+You have the flexibility to manually run containers on the active Docker engines. Alternatively, you can enable containers to start automatically on the Docker engine, streamlining the deployment process.
 
-Obviously all the containers running inside that will be down
+In the scenario where containers on the third node fail due to a node failure, the system exhibits resilience. The containers undergo migration to a healthy node, ensuring uninterrupted operation despite the setback. This process, whereby containers dynamically adapt to node failures and relocate to maintain availability, is aptly termed container orchestration.
 
-and users will not be able to access them.
+You will operate with a master node, commonly referred to as the orchestrator, overseeing the orchestration process. Complementing the orchestrator are clusters of Docker nodes, or worker nodes, where the orchestrator efficiently allocates and manages containers.
 
-I know what you would be thinking.
+Pooling all your Docker nodes into a unified resource cluster enhances fault tolerance, creating a resilient environment. While container orchestration is typically associated with production environments, it's worth noting that you can also run regular containers within this orchestrated infrastructure. The orchestration framework provides a robust foundation for managing containerized workloads, ensuring reliability and efficient resource utilization.
 
-How about doing high availability on
+In today's dynamic landscape, building your own orchestration platform is a feasible endeavor. However, with various established orchestration tools available in the market, you can leverage existing solutions to streamline the process.
 
-that, having multiple docker engine.
+Noteworthy orchestration tools include Docker Swarm, a direct offering from Docker. Kubernetes stands out as the most renowned orchestration tool. Apache presents Mesosphere Marathon, while cloud-based solutions include AWS ECS (Elastic Container Service) and AWS EKS (Elastic Kubernetes Service). Azure provides its Container Service, Google Cloud offers the Google Container Engine, and OpenShift is another compelling option.
 
-And you are right, we should be doing a clustering of
+This diverse range of orchestration tools caters to different needs, whether on-premises or cloud-based, allowing you to choose the one that aligns best with your requirements.
 
-a docker engine if you are running it for production.
+You also have the option of developing an in-house orchestration platform to meet specific needs.
 
-So not just one single docker node, multiple docker
+Among the various orchestration tools available, Kubernetes stands out as the most widely recognized. Notably, technologies like EKS are essentially implementations of Kubernetes. Additionally, on Mesosphere Marathon, you have the capability to run a Kubernetes cluster.
 
-nodes, but we will also need a master node
+Kubernetes is particularly prevalent across numerous environments, and the question arises: why is it so widely adopted? The answer harks back to a significant announcement from Google in 2014. At that time, Google revealed that every aspect of Google Gmail, and indeed everything in their infrastructure, was powered by Linux containers. This infrastructure launch included an astonishing rate of over 2 billion containers deployed every week. This revelation undoubtedly contributed to the widespread adoption of Kubernetes, solidifying its reputation as a leading orchestration tool in the industry.
 
-that is going to control all these docker nodes.
+This revelation dates back to 2014. When I first encountered this information while delving into the realms of containerization and Kubernetes, it was truly a jaw-dropping moment. Although I hadn't initially heard about it in 2014, the sheer magnitude of the news resonated with me when I eventually came across it.
 
-Sorry.
+What made it astonishing was not just the concept of containers but the staggering scale involved—2 billion containers. The impact became clearer as I delved into the technology. The key insight lies in understanding the disposable nature of containers. Their disposability allows for seamless updates; any modifications needed can be effortlessly implemented by replacing containers. Visualizing this on a global scale, considering Google's data centers spread across the world, underscores the immense task of managing billions of containers, revealing the transformative power of containerization in large-scale operations.
 
-The master node will give instruction to
+That's a significant revelation that sparked widespread interest as everyone sought to understand the intricacies of this remarkable achievement. It's important to note that Kubernetes originated from Google's internal infrastructure management tool called Borg, designed to handle Linux container LXC orchestration. The initial version of Kubernetes, however, did not exist during the inception of Borg.
 
-the docker node about containers to run.
+In mid-2014, Google made a pivotal move by introducing Kubernetes as an open-source project, essentially sharing an evolved version of Borg with the wider community. This marked the formal beginning of Kubernetes' journey as a collaborative and open platform.
 
-It's going to distribute containers across your docker nodes
+The milestone continued to evolve, and by mid-2015, the stable version of Kubernetes, version 1.0, was released. This release represented a significant step forward in the maturity and stability of Kubernetes, making it accessible to a broader audience for container orchestration.
 
-in case any of the docker node fails.
+Furthermore, Google established a partnership with the Cloud Native Computing Foundation (CNCF), leading to the project's management falling under the purview of CNCF. This partnership solidified the commitment to fostering open-source collaboration and innovation within the Kubernetes ecosystem.
 
-You can run containers on the live docker engines.
+The CNCF, in addition to managing the project, offers certifications and training programs for Kubernetes. This initiative serves to standardize knowledge and proficiency in Kubernetes across the industry.
 
-Or how about they get started
+The year 2016 marked a turning point for Kubernetes as it transitioned into the mainstream. During this period, auxiliary tools such as Kops and Minikube began emerging. These tools played a crucial role in simplifying the process of creating and configuring Kubernetes clusters, contributing to the broader adoption and accessibility of Kubernetes in various deployment scenarios.
 
-automatically on the docker engine.
+In late 2016, a pivotal case study emerged from Pokémon Go, instilling greater confidence in utilizing Kubernetes for production environments. This real-world example showcased the platform's robustness and reliability.
 
-Containers on the third node failed. Failed.
+Moving into 2017, significant strides in enterprise adoption of Kubernetes were witnessed. Google made a substantial contribution to this landscape, and IBM announced the Istio controller for ingress controls, resembling an application load balancer in functionality. GitHub made a noteworthy transition to running on Kubernetes, underlining the platform's suitability for large-scale and critical applications. In a symbolic move, Oracle joined the Cloud Native Computing Foundation (CNCF), aligning with the broader Kubernetes community.
 
-The node itself failed.
+Reflecting on these milestones, it might seem as though these events transpired in a distant past, but it's essential to acknowledge that we're referring to the year 2017—a relatively recent timeframe in the fast-evolving world of container orchestration and cloud-native technologies.
 
-The containers migrated to the healthy node.
+It's been just three years—not even a complete three years yet. Despite its relatively short existence, Kubernetes has rapidly matured into a robust platform, and its integration into Google's operations underscores its reliability. Google, a pioneer in the tech industry, has been leveraging Kubernetes for decades, attesting to its enduring utility and effectiveness.
 
-This itself is called as container orchestration.
+Beyond the formidable Google infrastructure, Kubernetes offers a plethora of remarkable features. It's important to clarify that Kubernetes isn't a direct replacement for the Docker engine; instead, it excels at managing clusters of Docker engines. Moreover, Kubernetes is versatile enough to extend its capabilities beyond Docker and can seamlessly manage clusters of other container runtime environments, such as Rocket. This flexibility and inclusivity contribute to the broad appeal and adoption of Kubernetes across diverse containerized environments.
 
-You will have a master node,
+Indeed, Kubernetes boasts an array of impressive features.
 
-which we call it as orchestrator.
+Service discovery and load balancing are seamlessly integrated into Kubernetes. When you create a container, referred to as a "pod" in this context, it is automatically discovered by the load balancer, and any updates to the load balancer are handled seamlessly. This dynamic interaction ensures efficient service discovery and load distribution within the cluster.
 
-And you will have cluster of docker nodes or
+One notable aspect is storage orchestration. Kubernetes provides seamless integration with a variety of storage solutions, including SAN, NAS, and even cloud-based solutions like EBS volumes and Ceph storage. The extensive list of supported storage options contributes to a robust and flexible storage orchestration environment within Kubernetes.
 
-worker nodes where orchestrator will distribute the container.
+As a result of these capabilities, confidence in running stateful containers has grown substantially. Kubernetes empowers users to manage both stateless and stateful applications with equal ease, making it a versatile and reliable platform for a wide range of containerized workloads.
 
-So all your docker node will be one
+Now, let's delve into some of the remarkable features of Kubernetes.
 
-single pool of resource which is fault tolerant.
+One of its standout capabilities is Automated Rollback. Kubernetes makes it effortlessly simple to deploy a new image version and equally easy to roll back in case the update proves problematic. This process, akin to what we do in Beanstalk, is executed at a faster pace, ensuring a swift and efficient deployment lifecycle.
 
-Container orchestration is done mostly for
+Kubernetes excels in Automatic Bin Packing. It intelligently places your containers on the most suitable node, ensuring optimal resource utilization based on the specified requirements. This meticulous allocation of resources contributes to the efficient utilization of computing resources.
 
-production environment, but you can run
+The Self-Healing on Node feature, as previously discussed in orchestration tools, kicks into action if a node becomes unavailable. It promptly resurrects your containers on a live node, ensuring continuous operation in the event of a node failure. Additionally, containers are actively monitored, allowing for proactive management similar to the Auto Scaling group in other environments. In the event of an instance failure, the Auto Scaling group launches a replacement, showcasing the self-healing capability, which operates even faster than traditional Auto Scaling groups.
 
-normal containers also on them.
+Kubernetes provides robust configuration management capabilities, allowing you to handle configurations in the form of variables, volumes, and encoded secrets. These encoded secrets add an extra layer of security to sensitive information.
 
-And today's time we have few
+While there are many more features to explore, these are some of the standout functionalities of Kubernetes. For a more comprehensive understanding, you can refer to the Kubernetes documentation, which provides a detailed overview of the platform's capabilities. We will also navigate through the documentation in the upcoming sections to gain a deeper insight into Kubernetes.
 
-orchestration tools in the market.
+Let's explore the architecture of Kubernetes, which involves several services working together to form the complete cluster.
 
-We have docker swarm, it's from docker directly.
+At its core, Kubernetes comprises two main components: the master node and the worker node. Worker nodes host the Docker engines, while the master node manages these worker nodes. Notably, you don't interact directly with the worker nodes to run containers; instead, you communicate your instructions to the master node.
 
-We have Kubernetes, the most famous
+Access to the master node doesn't involve direct logins. Instead, you connect to it using a client, providing information about the containers you wish to run. The master node, also referred to as the control plane, takes actions based on these instructions.
 
-one, Mesosphere Marathon from Apache.
+Within the master node or control plane, four essential services are at play:
 
-We have cloud based AWS ECS.
+API Server: Acts as a communication hub, processing requests and managing the cluster state.
+Scheduler: Determines which worker node should run a new pod based on resource requirements and constraints.
+Controller Manager: Ensures that the desired state of the cluster matches the actual state, handling node failures and replication.
+etcd: A distributed key-value store that stores the configuration data of the cluster.
+Beyond these fundamental services, additional services and add-ons can be incorporated into the master node.
 
-We have AWS EKS.
+On the worker node, three critical services operate:
 
-We have EKS again Elastic Kubernetes service, Azure.
+kubelet: Ensures that containers are running in a Pod.
+kube-proxy: Maintains network rules on nodes, facilitating communication between pods and external network traffic.
+Docker Engine: Executes and manages containers on the worker node.
+In upcoming sections, we'll delve into each of these services to gain a comprehensive understanding of the Kubernetes architecture.
 
-We have Container service.
+# Understanding Kubernetes Architecture
 
-We have Google container engine Coros fleet OpenShift.
+## Introduction
 
-So you have cloudbased also.
+In the realm of Kubernetes, the architecture involves multiple services working together to create a robust cluster. Let's explore the key components and their functionalities.
 
-You have inhouse solution also to
+## Components
 
-build your own orchestration platform.
+### Master Node and Worker Node
 
-Now, among all this, Kubernetes is the most famous
+At its core, Kubernetes comprises two main components:
 
-one and other technologies like EKS is actually Kubernetes.
+- **Master Node:** Manages worker nodes, where Docker engines run.
+- **Worker Node:** Hosts Docker engines and executes containers.
 
-And on Mesosphere Marathon you run Kubernetes cluster.
+### Interaction Model
 
-So most of the places Kubernetes is used, why?
+- You don't directly log into worker nodes to run containers; instructions are communicated to the master node.
+- Access to the master node, also known as the control plane, doesn't involve direct logins; instead, you connect to it using a client.
 
-A news from past from Google?
+### Control Plane (Master Node) Services
 
-Back in 2014, Google announced that everything in
+The control plane, or master node, consists of several key services:
 
-Google Gmail or everything runs on Linux containers.
+1. **API Server:** Acts as a communication hub, processing requests and managing the cluster state.
+2. **Scheduler:** Determines which worker node should run a new pod based on resource requirements and constraints.
+3. **Controller Manager:** Ensures that the desired state of the cluster matches the actual state, handling node failures and replication.
+4. **etcd:** A distributed key-value store that stores the configuration data of the cluster.
 
-And each week we launch more than 2 billion containers.
+Additional services and add-ons can be incorporated into the master node.
 
-This was in 2014.
+### Worker Node Services
 
-Now, when I saw this first time when I
+On the worker node, three essential services operate:
 
-was learning containers and when I was learning Kubernetes,
+1. **kubelet:** Ensures that containers are running in a Pod.
+2. **kube-proxy:** Maintains network rules on nodes, facilitating communication between pods and external network traffic.
+3. **Docker Engine:** Executes and manages containers on the worker node.
 
-it was really a jaw dropping news for me.
+## Conclusion
 
-I did not hear it in 2014, I got to know it later.
+This brief overview introduces the foundational components of Kubernetes architecture. In subsequent sections, we'll delve into each service, gaining a deeper understanding of their roles and functionalities.
 
-Jaw dropping because not of container, but because
+# Understanding Kubernetes Control Plane Components
 
-of the number of containers, 2 billion containers.
+## Control Plane Overview
 
-But when I use the technology, I
+In the realm of Kubernetes, the control plane, anchored by the master node, is a pivotal aspect that facilitates communication and coordination within the cluster. Let's delve into the key components of the control plane.
 
-understood why is that containers are disposable.
+### 1. Kube API Server
 
-So any changes you want to make, we replace the
+The **Kube API Server** serves as the linchpin of the control plane, acting as the main orchestrator. It handles all incoming and outgoing communication, enabling seamless interactions within the Kubernetes cluster. When instructions are sent to Kubernetes, the Kube API Server receives and processes them, passing the information to other crucial services like the scheduler, etcd, and worker nodes. It exposes the Kubernetes API, allowing for the integration of third-party tools such as monitoring agents, logging agents, and web dashboards. The Kube API Server serves as the front end for the entire Kubernetes cluster, offering a point of interaction for administrators and DevOps personnel. The `kubectl` command-line interface is commonly used to connect to the API server, providing a versatile tool for managing the cluster. Additionally, a web dashboard is available for a graphical interface, complementing the range of available integrations.
 
-containers and imagine Google data center across the world.
+### 2. etcd
 
-Of course, there'll be managing billions of containers.
+The second component on the master node is **etcd**, a key-value store designed for storing the critical information of the Kubernetes cluster. The Kube API Server interacts with etcd, storing and retrieving cluster information. Etcd contains runtime details, and it is crucial to regularly back up this data. In the event of a failure, losing etcd data results in the loss of current cluster state information. Etcd essentially stores the real-time state of everything within the cluster, making it a fundamental element for Kubernetes operations.
 
-Now. That's a big news.
+These two components, the Kube API Server and etcd, form the backbone of the control plane, orchestrating the communication, coordination, and storage essential for the effective functioning of a Kubernetes cluster.
 
-Everyone wanted to know how they are doing it.
+# Understanding Kubernetes Control Plane Components (Continued)
 
-So Kubernetes was created by Google.
+## Control Plane Components on the Master Node
 
-Actually they created a tool known as
+Let's continue exploring the key components residing on the master node, crucial for the orchestration of a Kubernetes cluster.
 
-Borg to manage Linux container LXC
+### 3. Scheduler
 
-There was no Kubernetes worked back then.
+The **Scheduler**, our third component, plays a vital role in the master node. It is responsible for intelligently scheduling containers onto the appropriate worker nodes. When a scheduling request is received, the Scheduler meticulously chooses the right worker node based on various factors such as resource requirements, hardware and software specifications, and any specified policies. Factors like affinity and anti-affinity rules, specifying preferences or restrictions on node selection, are considered. The Scheduler automates this decision-making process, but you can also provide explicit policies to guide its choices.
 
-But then in 2014, mid 2014, Google
+### 4. Controller Manager
 
-introduced Kubernetes as an open source project,
+The **Controller Manager**, our fourth component, is a collective term for multiple controllers, simplifying the nomenclature. It encapsulates various controllers responsible for specific tasks:
 
-which is just a version of Bark.
+- **Node Controller:** Monitors the health of worker nodes, taking corrective actions if any node goes down.
+- **Replication Controller:** Monitors pods (think of them as containers for now) and ensures the specified number of replicas are maintained.
+- **Endpoint Controller:** Populates the endpoint object, a crucial component we'll delve into later.
+- **Service Controller:** Manages service objects, defining a set of pods and a policy to access them.
+- **Token Controller:** Handles authentication and authorization within the cluster.
 
-Then in mid 2015, Kubernetes stable
+These components collectively form the Controller Manager, addressing different aspects of cluster management. While each serves a distinct purpose, together they contribute to the overall health, resilience, and functionality of the Kubernetes cluster.
 
-version was released V 10.
+# Worker Node Components in Kubernetes
 
-And also Google partnered with
+Now, let's explore the essential components on the worker nodes in a Kubernetes cluster.
 
-CNCF Cloud Native Computing Foundation.
+## 1. Kubelet
 
-Now the project is managed by CNCF.
+The first component on the worker node is the **Kubelet**—an agent that runs on every node. It listens to commands and requests from the Kubernetes master. When the Scheduler determines that a specific worker node should run a container, it assigns this responsibility to the Kubelet. The Kubelet then fetches the container image and executes the container, handling the heavy lifting involved, much like the commands you run with `docker run -p -v ...`.
 
-CNCF also has certification on
+## 2. Kube Proxy
 
-Kubernetes and training programs also
+**Kube Proxy** is a network proxy running on every node in the cluster. It facilitates network communication and allows you to set network rules, akin to security group rules. You can specify rules to allow or deny certain traffic, providing control over network access within the cluster.
 
-In 2016, Kubernetes goes mainstream.
+## 3. Container Runtime Environment
 
-There are tools that started getting
+The most critical component on the worker node is the **Container Runtime Environment**. Kubernetes is highly flexible in this regard—you can have Docker, Containerd, Rocket, or Kubernetes CRI as your runtime environment. Unlike Docker Swarm, which restricts you to using only Docker Engine, Kubernetes allows the use of various runtime environments.
 
-developed for it, like Kops, mini kube.
+## Add-ons
 
-These are tools to create or
+In addition to these components, you can include optional add-ons based on your requirements. These add-ons may include DNS services, a web UI, resource monitoring tools, or cluster-level logging. Third-party vendors often specialize in providing these components, offering enhanced capabilities for logging, monitoring, user interfaces, and more.
 
-set up the Kubernetes cluster.
+## Recap of the Architecture
 
-Then in late 2016, a case study was
+To recap the architecture:
 
-released by Pokemon Go, which gave people more
+- The Kubernetes master comprises the API server, scheduler, controller manager, etcd.
+- The kubelet on the worker node acts as an agent, executing instructions from the master.
+- kube-proxy facilitates network communication and rule-setting.
+- The container runtime environment allows flexibility in choosing runtime technologies.
 
-confidence on running Kubernetes for production.
+Remember not to confuse `kubectl` (our tool for connecting) with `kubelet` (the agent running on the worker node). While `kubectl` is used for connecting and managing, `kubelet` performs the heavy lifting for container execution.
 
-Then in 2017, the enterprise adoption came in Google.
+# Understanding kube-proxy and Pod in Kubernetes
 
-IBM announced istio controller ingress controls
+## Kube Proxy: The Network Proxy
 
-more like application load balancer.
+**kube-proxy** serves as a network proxy in Kubernetes. When you need to expose a Pod to the external world, you can utilize kube-proxy. It allows you to set network rules, providing a flexible approach to handling Pod communication.
 
-GitHub started running on Kubernetes, oracle joined
+## Docker Engine and Pod
 
-CNCF, and the rest is history.
+The **Docker Engine** is where your containers run, encapsulated within a Pod. Now, let's dive into understanding what exactly a Pod is.
 
-Now, I'm talking as if it
+### Pod and Container Relationship
 
-happened long, long time back.
+A **Pod** in Kubernetes is akin to a Virtual Machine (VM) in its relationship with the process running inside it. Consider a VM running a Tomcat process—it allocates resources such as network, RAM, CPU, and storage to the process. Similarly, a Pod allocates all necessary resources to a container running inside it. The container, resembling a process, utilizes these resources. Think of the Pod as the VM providing isolation and resource allocation for the container.
 
-It's just 2017.
+### Importance of Pod in Kubernetes
 
-It's just three years now.
+Why does Kubernetes use Pods instead of directly running containers? The key lies in abstraction. Kubernetes supports various container runtime environments like Docker, Rocket, and CRI. The Pod acts as an abstraction layer, providing a consistent interface regardless of the underlying container runtime environment. Without the Pod abstraction, this level of flexibility and compatibility across runtimes would be challenging to achieve.
 
-Not even complete three years now.
+# Understanding Pods in Kubernetes
 
-Along with its mature platform, Google is using it.
+## Overview of Pods
 
-Google was using it for decades now.
+Now, let's delve into the concept of Pods in Kubernetes.
 
-So, apart from all that Google power, there's
+### Abstraction with Pod
 
-so many amazing feature that Kubernetes really provides.
+A **Pod** in Kubernetes is a standardized set of commands and configurations, providing an abstraction layer regardless of the underlying technology. It allows us to provide instructions to the Pod, which, in turn, manages the execution for the container running inside it. If, for instance, you have a Tomcat process running in a Pod, Tomcat becomes the container running on a specific port (e.g., 8080), and the Pod assigns an IP address for access.
 
-First of all, Kubernetes really not
+### Pod and Container Relationship
 
-a replacement for docker engine.
+In a Pod, you can have one or multiple containers. The Pod allocates resources to the containers. Consider the examples:
+- Pod One: A Pod with one container inside.
+- Pod Two: A Pod with a container and an attached volume.
+- Pod Three: A Pod with two containers and a shared volume between them.
 
-Kubernetes manages the cluster of docker engine.
+### Running Multiple Containers in a Pod
 
-And not only docker engine, it can manage
+While you can have multiple containers in a Pod, it's typically recommended to have one main container and additional helper containers. The main container performs the primary task, while helper containers assist with activities like logging or monitoring. For example, a Pod with Tomcat might have a sidecar container assisting with log streaming.
 
-cluster of other container runtime environment like rocket.
+### Interactions and Overlay Network
 
-So, amazing features.
+Pods can be distributed across multiple worker nodes, and they interact using an **overlay network**. This network acts as a virtual private network (VPC) connecting all nodes, with each node having its subnet. The bridge zero within each node functions as a switch, enabling communication between Pods on the same node. When Pods on different nodes need to interact, the overlay network forwards the request through a routing mechanism, facilitating communication across nodes.
 
-With Kubernetes, you have
+In summary, Pods provide a standardized and abstracted environment for containerized applications, with the overlay network enabling seamless communication within and across nodes in a Kubernetes cluster.
 
-service discovery, load balancing.
 
-You create a container, which we call it a
+# Setting Up a Kubernetes Cluster
 
-spot here, which gets automatically discovered by the load
+Enough theory about the architecture, let's get practical and set up a Kubernetes Cluster. There are multiple ways to achieve this:
 
-balancer, and it gets updated in the load balancer.
+## Manual Setup (Not Recommended for Production)
 
-Also we'll see how cool is that?
+The hardest way involves manually setting up a Kubernetes Cluster. However, this approach is not recommended for production environments and is best suited for learning purposes.
 
-Storage orchestration, kubernetes provide integration with
+## Tools for Easier Setup
 
-lots of storage, SAN, NAV, even
+### MiniKube
+- Ideal for testing and learning.
+- Sets up a single-node Kubernetes Cluster on your computer, usually within a virtual machine using VirtualBox.
+- Useful for understanding Kubernetes components but not recommended for production.
 
-EBS volume, ceph storage.
+### Kubeadm
+- Popular for setting up production-ready, multi-node Kubernetes clusters.
+- Allows you to define the number of worker nodes, making it scalable.
+- Requires running specific commands on the master node and worker nodes to establish the connection.
 
-And there's a huge list that goes on.
+### Kops (Kubernetes Operations)
+- Considered the most stable option for production.
+- Originally designed for AWS but now supports Google Cloud, Digital Ocean, and OpenStack.
+- Provides a reliable way to set up and manage your Kubernetes Cluster with fewer manual steps.
 
-So people got more confident
+In our guide, we'll explore both MiniKube and Kops to cater to testing, learning, and production requirements.
 
-on running stateful containers.
-
-Now, automated Rollback it's very easy to roll
-
-out a new image version and also roll
-
-back very easily if it's not working.
-
-Just like we do in beanstalk, but faster than that.
-
-Automatic bin packing.
-
-So it's going to place your container
-
-on the right note where it gets
-
-the right resource based on the requirement.
-
-And because of that, your resource
-
-is best utilized your computer resource.
-
-Self Healing on Node we
-
-already discussed orchestration tools.
-
-If the node goes down, it brings your
-
-containers to life on the live node.
-
-Apart from that, your containers are also monitored.
-
-You can set that just like Auto Scaling group.
-
-When an instance goes down, Auto scaling
-
-group will launch a replacement like that
-
-The self healing capability, it's much
-
-faster than Auto scaling group.
-
-You can manage the configuration in form of variables
-
-and volumes and also secrets which are encoded values.
-
-There are actually many more things we can go on
-
-and on but kind of highlighting cool features of Kubernetes.
-
-You can check in the link
-
-Kubernetes documentation and go through.
-
-It's a nice overview.
-
-Anyways, we are going to run through the documentation.
-
-Also Kubernetes architecture.
-
-So there are many services in play that gives
-
-you the complete Kubernetes architecture or the cluster.
-
-Two main components, master node and worker node.
-
-Worker nodes are the one
-
-where docker engine are running.
-
-Master node is the one that
-
-is managing these worker nodes.
-
-So you don't log into the
-
-worker node and run the containers.
-
-You tell it to the master node.
-
-You don't even log into master node.
-
-You connect by using some client.
-
-You give information to the master node that
-
-I want to run so on so containers.
-
-And it is going to take
-
-the action based on the requirement.
-
-So you have in the master node
-
-which is also called as control plane.
-
-Master node is also called as control plane.
-
-You have service here, API server one service
-
-second scheduler, third controller manager, fourth etcd.
-
-These are four basic services.
-
-Then you can add few more services.
-
-There are add ons also.
-
-But these are four primary service
-
-in Kubernetes master or control plane.
-
-Worker node will have kublet proxy, the docker engine.
-
-These three important services running on worker node.
-
-We'll understand all of this one by one.
-
-First, let's talk about the control
-
-plane, master node, kube API server.
-
-The first service we will talk about and
-
-this is the main hero in this game.
-
-It handles all the incoming and outgoing communication.
-
-This makes the communication possible
-
-to and through Kubernetes cluster.
-
-So when you want to send instructions to Kubernetes
-
-kube API server is going to receive that.
-
-And then it's going to pass the
-
-information to other services like scheduler etcd.
-
-And worker notes.
-
-It exposes Kubernetes API.
-
-If you want, you can build your own
-
-tool that gets integrated with Kubernetes API.
-
-There are so many third party tools to be
-
-available to integrate with your Kubernetes API which you
-
-can use like monitoring agent, logging agent, web dashboards.
-
-It is the front end of the control plane or
-
-for the whole Kubernetes cluster, that's the front end being
-
-an admin or even DevOps in general admin.
-
-We can use kubectl command line interface
-
-to connect to the API server.
-
-So we should have this kube
-
-CTL installed in our machine.
-
-We're going to use that and
-
-connect it to the Kubernetes cluster.
-
-There's actually a lot of commands and you
-
-really need to master the art of Kubectl.
-
-If you're managing Kubernetes cluster.
-
-There's also web dashboard which you
-
-can integrate with the API server.
-
-And there are many more integrations.
-
-Okay, that's API server first component
-
-on our master node, second etcd.
-
-Storage, etcd.
-
-Is a key value store.
-
-It stores the information of your Kubernetes cluster.
-
-The kube API service going to store
-
-or retrieve information from this, etc.
-
-It will have all the runtime information
-
-and it should be backed up regularly.
-
-Because if this fails, you lose the current data.
-
-You will not know what pod is
-
-running, where the containers will be still
-
-running, but you'll lose the information.
-
-It stores the current state
-
-of everything in the cluster.
-
-Next is Scheduler.
-
-Third component in our master node, scheduler is going
-
-to schedule your container on the right node.
-
-So it's going to watch for the request.
-
-When it receives, Scheduler will pick up the right worker
-
-node and send the information to the worker node saying
-
-that, hey, you need to run this container.
-
-And there are various factors based on which
-
-it is going to decide, like based on
-
-the resource requirement or the hardware software or
-
-any policy that you have given.
-
-Like you have said, I want to run it on
-
-a worker node that has XYZ hardware or XYZ software.
-
-So those factors will be considered
-
-affinity and anti affinity rules.
-
-You can say I want to run my container on
-
-this particular node or just the opposite, I don't want
-
-to run my container on this particular node.
-
-Okay, that is also a factor date,
-
-locality and there are few other factors.
-
-So mostly automatically it will decide, but you can
-
-also give the policy affinity or Nty affinity rules.
-
-Okay.
-
-Fourth component, controller Manager.
-
-Actually it's group of multiple
-
-things that are running.
-
-So reduce the complexity.
-
-We just call it as Controller Manager.
-
-One single thing, but it actually does multiple things.
-
-It's a node controller.
-
-It's going to monitor your worker node.
-
-If it goes down, it's going to take some actions.
-
-Replication controller it has which is
-
-going to monitor your pods.
-
-Pods as of now, understand as container.
-
-We'll get into what is parts.
-
-Think of them as just container for now.
-
-So replication controller is going to monitor your
-
-containers and if it goes down, it's going
-
-to do the auto hailing endpoint controller.
-
-It's going to populate the endpoint
-
-object which we're going to see.
-
-There is service object and service account
-
-and Token controller manages the authentication authorization.
-
-Okay, so these were the
-
-control plane master node component.
-
-Let's check the worker node components.
-
-Okay, first of all, you have
-
-the kubelet, that is the agent.
-
-It will be running on every node.
-
-And this is going to listen to
-
-your Kubernetes master request or commands.
-
-So when Scheduler decides that this worker node
-
-is going to run the container, it's going
-
-to assign the responsibility to kubelet.
-
-Now kubelet is going to fetch your
-
-image and run the container from it.
-
-So it's going to do the heavy lifting.
-
-So as we run the commands
-
-right, docker run -p -v .....
-
-Now kubelet will be doing it kubeproxy.
-
-This actually is a network proxy that is going
-
-to run on every note in the cluster.
-
-You can set network rules also like security group
-
-rules, we have allow this or deny that.
-
-And the most important
-
-one, container runtime environment.
-
-So you can have docker.
-
-Now, Kubernetes is quite flexible in this.
-
-You can have docker engine in that you
-
-can have container D, you can have Rocket
-
-or you can have Kubernetes CRI.
-
-So if you go with docker swarm,
-
-then you can only use docker engine.
-
-But with Kubernetes you can
-
-use other runtime environment also.
-
-So, along with all these components, if you want,
-
-you can do some add ons like DNS, web
-
-UI, or resource monitoring, or cluster level logging.
-
-Most of the time these components are taken by
-
-some third party vendors who have some specialization in
-
-that area, like better logging tool, better monitoring tool,
-
-or web user interface, or even DNS service.
-
-Okay, let's look at the architecture once again.
-
-kubelet is our tool, which we are going to use
-
-to connect to the Kubernetes master master mode, you have
-
-APS server scheduler, controller manager at CD, etcd.
-
-Stores the current information.
-
-API server enables the communication scheduler, decides where
-
-your container will be running on which node.
-
-Controller manager responsible for monitoring
-
-worker node, your containers, and
-
-also the authentication authorization.
-
-In worker node, you have kubelet, which is the agent.
-
-Now, don't get confused between kubelet and kube CTL.
-
-It's quite easy to confuse between them.
-
-kubectl is our tool to connect, and kubelet is
-
-an agent running in the work or not, right?
-
-So, kubelet will do all the
-
-heavy lifting on the container.
-
-It's going to fetch the image, run the
-
-containers, map the volumes, do all those stuff.
-
-kube proxy is a network proxy.
-
-If you want to expose a Pod to the
-
-outside world, you can do it through Kube proxy,
-
-or you can even set the network rules.
-
-And then the docker engine, of course,
-
-where your containers will be running, but
-
-you see the container enclosed in Pod.
-
-Okay, Pod, we'll understand what really is this Pod.
-
-Now, what is the relation
-
-between Pod and the container?
-
-It's the same relation a VM has
-
-with the process running inside it.
-
-So let's say a Tomcat process is running in a VM.
-
-So the VM is going to provide all the
-
-resource to the process, which is running network, Ram,
-
-CPU, storage, everything, and the process just uses it.
-
-Similarly, Pod is going to provide
-
-all the resource to a container.
-
-The container will be running inside the Pod.
-
-So container will be like the process
-
-and Pod will be like the VM.
-
-And I'm just giving you this
-
-example so you can relate again.
-
-There is no virtualization.
-
-Here it's again isolation.
-
-Now, why does Kubernetes use pod
-
-Why not directly run containers?
-
-Well, it's because Kubernetes can use different
-
-container runtime environment like docker, rocket, CRI.
-
-If you don't have the Pod,
-
-there will be no abstraction.
-
-Now, we have Pod.
-
-It's a standard set of commands, standard set
-
-of configuration that we do, it doesn't matter
-
-what technology we are using behind the scene.
-
-So Pod gives us an abstraction.
-
-So we give information to the Pod, what to
-
-do, and Pod is going to do it.
-
-That for the container which is running inside it.
-
-So if you're running a tomcat process in the Pod, the
-
-Tomcat will be the container which will be running on port
-
-8080 and the Pod will give the IP address.
-
-So you can access it by giving the Pod
-
-IP and the port number of the container.
-
-We'll see how that works.
-
-As of now, you can go with
-
-the idea containers are inside the Pod.
-
-And in a Pod you can have one or many container.
-
-Pod gives the resources to the container.
-
-So first you see Pod One, there's a
-
-Pod and there's one container running inside that.
-
-Second example you see Pod.
-
-There's a container and there is
-
-a volume attached to it.
-
-Third example you see two containers and a volume.
-
-Now in this case, both the containers
-
-will have access to this volume.
-
-So you can have one or
-
-many containers running inside the Pod.
-
-But should you run multiple containers inside the Pod?
-
-Well, it really depends.
-
-Ideally you will see one
-
-container running inside the Pod.
-
-The other container will be the helper containers.
-
-So you see here in node one, you have
-
-a Pod and a main container running inside that.
-
-So one Pod, one container.
-
-In the second example you see two containers.
-
-One is called a sidecar.
-
-The other one is in it.
-
-Now in its container will be short lived container.
-
-It's going to start does some command
-
-execution and then it will be dead.
-
-Then when it is dead, the main
-
-container will start with the sidecar container.
-
-If you have sidecar container, work will be helping
-
-the main container, like for example, streaming the log.
-
-So it could be a logging agent or
-
-a monitoring agent to help your main container.
-
-But at any given point of time, you should
-
-have one main container only running in the Pod.
-
-The other containers will be helper containers.
-
-So my point is, if you have tomcat and MySQL, you
-
-are not going to run both in the same pod.
-
-You'll run it on different different pods.
-
-Containers will be distributed across multiple and
-
-now we will use the word Pod.
-
-Pod will be distributed across multiple worker nodes.
-
-So let's say you have a Pod One, which is
-
-in node One and you have Pod Six, which is
-
-in node three, and they want to interact.
-
-Maybe Pod One is Tomcat, pod Six is MySQL.
-
-So how will they interact?
-
-Well, there is overlay network.
-
-Think of this as the VPC that we have seen in AWS.
-
-So you have a joint network, a virtual network
-
-that connects all the node and every node.
-
-You'll have a subnet, like a local area
-
-network, a private network running inside the node.
-
-And you see their bridge zero.
-
-This will act like a switch.
-
-So all the Pod running in this node,
-
-one will be able to communicate with each
-
-other with the help of this bridge zero.
-
-But when it wants to connect to a container to
-
-a Pod running in another node, then bridge zero is
-
-going to forward the request to this WG zero.
-
-You see, that acts like a router.
-
-So it's going to route by looking at the IP address,
-
-it's going to route it to the right node router.
-
-So it receives by the other router in
-
-the node that forwards it to the switch.
-
-And then the switch sends it to the Pod.
-
-Now I'm using the word
-
-switch and router for understanding.
-
-So there will be a joint network, virtual network.
-
-All your Pod doesn't matter in what node
-
-it is, will be in that network.
-
-Every node will have a small private network.
-
-And all these private network will
-
-be connected in one bigger network.
-
-This is overly network.
-
-Okay, enough said about the architecture.
-
-Let's see how to set up a Kubernetes Cluster now.
-
-So Kubernetes Cluster can be set up
-
-manually, which is the hardest way.
-
-And frankly, you really don't need to do that if
-
-you want to do it for understanding and understanding only.
-
-If you really want to set up Kubernetes
-
-Cluster, there are nice tools to do it.
-
-You have mini kube to start with,
-
-which is for testing and learning purpose.
-
-It is just going to set one
-
-node Kubernetes Cluster mostly in your computer.
-
-So it's going to launch a virtual machine using
-
-VirtualBox and on that one VM, the master node
-
-and worker node components will be running only for
-
-testing and learning purpose, not really production.
-
-kubeadm is a very popular tool to
-
-set up Kubernetes Cluster for production.
-
-Multi node, Kubernetes cluster.
-
-So you can have as many as worker node.
-
-Let's say you're saying I need four
-
-worker node and one master node.
-
-So you need to log into master mode, run
-
-some command, get into worker node, run some command,
-
-and then they are finally connected together.
-
-So you can use any platform if you're
-
-using kubeadm, you want to do for easy
-
-to physical machines, virtual machines anywhere.
-
-There are a lot of manual steps over
-
-here that you need to execute kops.
-
-I find this is the most stable
-
-way of running Kubernetes Cluster for production.
-
-So it came initially only for AWS,
-
-but now it has support also for
-
-Google Cloud, Digital Ocean, and Open Stack.
-
-So if you want to run your own cluster, kubernetes
-
-Cluster the most stable way you can use kops.
-
-So we're going to see we're going
-
-to see mini kube and kops both way.
 
