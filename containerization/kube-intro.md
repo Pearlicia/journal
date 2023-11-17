@@ -1,29 +1,35 @@
 # Kubernetes 
-Kubernetes stands out as the leading container orchestration tool. We've successfully deployed numerous containers so far, all managed within a single Docker engine. However, the potential risk arises when this singular Docker engine encounters a failure.
-
-In the unfortunate event of a Docker engine failure, all containers hosted within that engine will inevitably go offline, rendering them inaccessible to users.
+## Overview
+Kubernetes stands out as the leading container orchestration tool. We've successfully deployed numerous containers so far, all managed within a single Docker engine. However, the potential risk arises when this singular Docker engine encounters a failure. In the unfortunate event of a Docker engine failure, all containers hosted within that engine will inevitably go offline, rendering them inaccessible to users.
 
 Anticipating this concern, you might be contemplating implementing high availability by deploying multiple Docker engines. And you're absolutely correct; for production environments, it's crucial to establish a cluster of Docker engines.
 
-This involves not just a singular Docker node but multiple Docker nodes. Additionally, a master node is indispensable in orchestrating and overseeing the activities of these Docker nodes, ensuring coordinated and efficient management of the containerized workloads. This clustering approach enhances the reliability and resilience of the overall system, mitigating the impact of potential failures on the availability of applications.
+This involves not just a singular Docker node but multiple Docker nodes. Additionally, a **master node** is indispensable in orchestrating and overseeing the activities of these Docker nodes, ensuring coordinated and efficient management of the containerized workloads. This clustering approach enhances the reliability and resilience of the overall system, mitigating the impact of potential failures on the availability of applications.
 
-The master node takes charge of instructing the Docker nodes on which containers to run. Its primary responsibility is to efficiently distribute containers across the Docker nodes, stepping in seamlessly if any of the Docker nodes encounters a failure.
+The **master node** takes charge of instructing the Docker nodes on which containers to run. Its primary responsibility is to efficiently distribute containers across the Docker nodes, stepping in seamlessly if any of the Docker nodes encounters a failure.
 
 You have the flexibility to manually run containers on the active Docker engines. Alternatively, you can enable containers to start automatically on the Docker engine, streamlining the deployment process.
 
-In the scenario where containers on the third node fail due to a node failure, the system exhibits resilience. The containers undergo migration to a healthy node, ensuring uninterrupted operation despite the setback. This process, whereby containers dynamically adapt to node failures and relocate to maintain availability, is aptly termed container orchestration.
+In the scenario where containers on the other nodes fail due to a node failure, the system exhibits resilience. The containers undergo migration to a healthy node, ensuring uninterrupted operation despite the setback. This process, whereby containers dynamically adapt to node failures and relocate to maintain availability, is aptly termed **container orchestration.**
 
-You will operate with a master node, commonly referred to as the orchestrator, overseeing the orchestration process. Complementing the orchestrator are clusters of Docker nodes, or worker nodes, where the orchestrator efficiently allocates and manages containers.
+You will operate with a **master node,** commonly referred to as the orchestrator, overseeing the orchestration process. Complementing the orchestrator are clusters of Docker nodes, or worker nodes, where the orchestrator efficiently allocates and manages containers.
 
 Pooling all your Docker nodes into a unified resource cluster enhances fault tolerance, creating a resilient environment. While container orchestration is typically associated with production environments, it's worth noting that you can also run regular containers within this orchestrated infrastructure. The orchestration framework provides a robust foundation for managing containerized workloads, ensuring reliability and efficient resource utilization.
 
 In today's dynamic landscape, building your own orchestration platform is a feasible endeavor. However, with various established orchestration tools available in the market, you can leverage existing solutions to streamline the process.
 
-Noteworthy orchestration tools include Docker Swarm, a direct offering from Docker. Kubernetes stands out as the most renowned orchestration tool. Apache presents Mesosphere Marathon, while cloud-based solutions include AWS ECS (Elastic Container Service) and AWS EKS (Elastic Kubernetes Service). Azure provides its Container Service, Google Cloud offers the Google Container Engine, and OpenShift is another compelling option.
+Noteworthy orchestration tools include:
+- **Docker Swarm** A direct offering from Docker.
+- **Kubernetes** stands out as the most renowned orchestration tool.
+- **Mesosphere Marathon** From Apache
+  While cloud-based solutions include
+- **AWS ECS (Elastic Container Service) and AWS EKS (Elastic Kubernetes Service)** AWS offerings
+- **Azure Container Service** From Azure
+- **Google Container Engine** Google Cloud offering
+- **OpenShift**
+- CoreOS Fleet
 
-This diverse range of orchestration tools caters to different needs, whether on-premises or cloud-based, allowing you to choose the one that aligns best with your requirements.
-
-You also have the option of developing an in-house orchestration platform to meet specific needs.
+This diverse range of orchestration tools caters to different needs, whether on-premises or cloud-based, allowing you to choose the one that aligns best with your requirements. You also have the option of developing an in-house orchestration platform to meet specific needs.
 
 Among the various orchestration tools available, Kubernetes stands out as the most widely recognized. Notably, technologies like EKS are essentially implementations of Kubernetes. Additionally, on Mesosphere Marathon, you have the capability to run a Kubernetes cluster.
 
