@@ -60,25 +60,25 @@ Beyond the formidable Google infrastructure, Kubernetes offers a plethora of rem
 
 ### Kubernetes boasts an array of impressive features.
 
-- **Service discovery and load balancing** are seamlessly integrated into Kubernetes. When you create a container, referred to as a "pod" in this context, it is automatically discovered by the load balancer, and any updates to the load balancer are handled seamlessly. This dynamic interaction ensures efficient service discovery and load distribution within the cluster.
+- **Service discovery and load balancing:** Seamlessly integrated into Kubernetes. When you create a container, referred to as a "pod" in this context, it is automatically discovered by the load balancer, and any updates to the load balancer are handled seamlessly. This dynamic interaction ensures efficient service discovery and load distribution within the cluster.
 
-- **Storage orchestration** Kubernetes provides seamless integration with a variety of storage solutions, including Storage Area Network(SAN), Network-Attached Storage(NAS), and even cloud-based solutions like EBS volumes and Ceph storage. The extensive list of supported storage options contributes to a robust and flexible storage orchestration environment within Kubernetes. As a result of these capabilities, confidence in running stateful containers has grown substantially. 
+- **Storage orchestration:** Kubernetes provides seamless integration with a variety of storage solutions, including Storage Area Network(SAN), Network-Attached Storage(NAS), and even cloud-based solutions like EBS volumes and Ceph storage. The extensive list of supported storage options contributes to a robust and flexible storage orchestration environment within Kubernetes. As a result of these capabilities, confidence in running stateful containers has grown substantially. 
 
-- **Automated rollouts and rollbacks** Kubernetes makes it effortlessly simple to deploy a new image version and equally easy to roll back in case the update proves problematic. This process, akin to what we do in AWS Elastic Beanstalk, but at a faster pace, ensuring a swift and efficient deployment lifecycle.
+- **Automated rollouts and rollbacks:** Kubernetes makes it effortlessly simple to deploy a new image version and equally easy to roll back in case the update proves problematic. This process, akin to what we do in AWS Elastic Beanstalk, but at a faster pace, ensuring a swift and efficient deployment lifecycle.
 
-- **Automatic bin packing** It intelligently places your containers on the most suitable node, ensuring optimal resource utilization based on the specified requirements. This meticulous allocation of resources contributes to the efficient utilization of computing resources.
+- **Automatic bin packing:** It intelligently places your containers on the most suitable node, ensuring optimal resource utilization based on the specified requirements. This meticulous allocation of resources contributes to the efficient utilization of computing resources.
 
-- **Self-healing** If a node becomes unavailable. It promptly resurrects your containers on a live node, ensuring continuous operation in the event of a node failure. Additionally, containers are actively monitored, allowing for proactive management similar to the Auto Scaling group in other environments. In the event of an instance failure, the Auto Scaling group launches a replacement, showcasing the self-healing capability, which operates even faster than traditional Auto Scaling groups.
+- **Self-healing:** If a node becomes unavailable. It promptly resurrects your containers on a live node, ensuring continuous operation in the event of a node failure. Additionally, containers are actively monitored, allowing for proactive management similar to the Auto Scaling group in other environments. In the event of an instance failure, the Auto Scaling group launches a replacement, showcasing the self-healing capability, which operates even faster than traditional Auto Scaling groups.
 
-- **Secret and configuration management** Kubernetes provides robust configuration management capabilities, allowing you to handle configurations in the form of variables, volumes, and encoded secrets. These encoded secrets add an extra layer of security to sensitive information.
+- **Secret and configuration management:** Kubernetes provides robust configuration management capabilities, allowing you to handle configurations in the form of variables, volumes, and encoded secrets. These encoded secrets add an extra layer of security to sensitive information.
 
-- **Batch Execution**: Kubernetes can manage not only services but also your batch and CI workloads. It has the capability to replace failing containers if desired.
+- **Batch Execution:** Kubernetes can manage not only services but also your batch and CI workloads. It has the capability to replace failing containers if desired.
 
 - **Horizontal Scaling**: Easily scale your application up and down using a simple command, a UI, or automatically based on CPU usage.
 
-- **IPv4/IPv6 Dual-Stack**: Kubernetes supports the allocation of both IPv4 and IPv6 addresses to Pods and Services.
+- **IPv4/IPv6 Dual-Stack:** Kubernetes supports the allocation of both IPv4 and IPv6 addresses to Pods and Services.
 
-- **Designed for Extensibility**: Extend the features of your Kubernetes cluster without the need to modify upstream source code.
+- **Designed for Extensibility:** Extend the features of your Kubernetes cluster without the need to modify upstream source code.
 
 While there are many more features to explore, these are some of the standout functionalities of Kubernetes. For a more comprehensive understanding, you can refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) which provides a detailed overview of the platform's capabilities. 
 
