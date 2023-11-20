@@ -1,5 +1,7 @@
-# Kubernetes 
-## Overview
+# Kubernetes Overview
+
+### Introduction
+
 Kubernetes stands out as the leading container orchestration tool. We've successfully deployed numerous containers so far, all managed within a single Docker engine. However, the potential risk arises when this singular Docker engine encounters a failure. In the unfortunate event of a Docker engine failure, all containers hosted within that engine will inevitably go offline, rendering them inaccessible to users.
 
 Anticipating this concern, you might be contemplating implementing high availability by deploying multiple Docker engines. And you're absolutely correct; for production environments, it's crucial to establish a cluster of Docker engines.
@@ -18,132 +20,103 @@ Pooling all your Docker nodes into a unified resource cluster enhances fault tol
 
 In today's dynamic landscape, building your own orchestration platform is a feasible endeavor. However, with various established orchestration tools available in the market, you can leverage existing solutions to streamline the process.
 
-Noteworthy orchestration tools include:
+#### Noteworthy orchestration tools include:
 - **Docker Swarm** A direct offering from Docker.
 - **Kubernetes** stands out as the most renowned orchestration tool.
 - **Mesosphere Marathon** From Apache
-  While cloud-based solutions include
+- 
+  #### While cloud-based solutions include:
 - **AWS ECS (Elastic Container Service) and AWS EKS (Elastic Kubernetes Service)** AWS offerings
 - **Azure Container Service** From Azure
 - **Google Container Engine** Google Cloud offering
 - **OpenShift**
-- CoreOS Fleet
+- **CoreOS Fleet**
 
 This diverse range of orchestration tools caters to different needs, whether on-premises or cloud-based, allowing you to choose the one that aligns best with your requirements. You also have the option of developing an in-house orchestration platform to meet specific needs.
 
 Among the various orchestration tools available, Kubernetes stands out as the most widely recognized. Notably, technologies like EKS are essentially implementations of Kubernetes. Additionally, on Mesosphere Marathon, you have the capability to run a Kubernetes cluster.
 
-Kubernetes is particularly prevalent across numerous environments, and the question arises: why is it so widely adopted? The answer harks back to a significant announcement from Google in 2014. At that time, Google revealed that every aspect of Google Gmail, and indeed everything in their infrastructure, was powered by Linux containers. This infrastructure launch included an astonishing rate of over 2 billion containers deployed every week. This revelation undoubtedly contributed to the widespread adoption of Kubernetes, solidifying its reputation as a leading orchestration tool in the industry.
+Kubernetes is particularly prevalent across numerous environments, and the question arises: why is it so widely adopted? The answer harks back to a significant announcement from Google in 2014. At that time, Google revealed that every aspect of Google Gmail, and indeed everything in their infrastructure, was powered by Linux containers. This infrastructure launch included an astonishing rate of over 2 billion containers deployed every week. This revelation undoubtedly contributed to the widespread adoption of Kubernetes, solidifying its reputation as a leading orchestration tool in the industry. What made it astonishing was not just the concept of containers but the staggering scale **involved—2 billion containers.** 
 
-This revelation dates back to 2014. When I first encountered this information while delving into the realms of containerization and Kubernetes, it was truly a jaw-dropping moment. Although I hadn't initially heard about it in 2014, the sheer magnitude of the news resonated with me when I eventually came across it.
+The key insight lies in understanding the disposable nature of containers. Their disposability allows for seamless updates; any modifications needed can be effortlessly implemented by replacing containers. Visualizing this on a global scale, considering Google's data centers spread across the world, underscores the immense task of managing **billions of containers,** revealing the transformative power of containerization in large-scale operations. That's a significant revelation that sparked widespread interest as everyone sought to understand the intricacies of this remarkable achievement. It's important to note that Kubernetes originated from Google's internal infrastructure management tool called **Borg,** designed to handle Linux container LXC orchestration. The initial version of Kubernetes, however, did not exist during the inception of **Borg.**
 
-What made it astonishing was not just the concept of containers but the staggering scale involved—2 billion containers. The impact became clearer as I delved into the technology. The key insight lies in understanding the disposable nature of containers. Their disposability allows for seamless updates; any modifications needed can be effortlessly implemented by replacing containers. Visualizing this on a global scale, considering Google's data centers spread across the world, underscores the immense task of managing billions of containers, revealing the transformative power of containerization in large-scale operations.
+**In mid-2014,** Google made a pivotal move by introducing Kubernetes as an open-source project, essentially sharing an evolved version of **Borg** with the wider community. This marked the formal beginning of Kubernetes' journey as a collaborative and open platform.
 
-That's a significant revelation that sparked widespread interest as everyone sought to understand the intricacies of this remarkable achievement. It's important to note that Kubernetes originated from Google's internal infrastructure management tool called Borg, designed to handle Linux container LXC orchestration. The initial version of Kubernetes, however, did not exist during the inception of Borg.
+The milestone continued to evolve, and by **mid-2015,** the stable version of Kubernetes, version 1.0, was released. This release represented a significant step forward in the maturity and stability of Kubernetes, making it accessible to a broader audience for container orchestration.
 
-In mid-2014, Google made a pivotal move by introducing Kubernetes as an open-source project, essentially sharing an evolved version of Borg with the wider community. This marked the formal beginning of Kubernetes' journey as a collaborative and open platform.
+Furthermore, Google established a partnership with the **Cloud Native Computing Foundation (CNCF),** leading to the project's management falling under the purview of CNCF. This partnership solidified the commitment to fostering open-source collaboration and innovation within the Kubernetes ecosystem. The **CNCF,** in addition to managing the project, offers certifications and training programs for Kubernetes. This initiative serves to standardize knowledge and proficiency in Kubernetes across the industry.
 
-The milestone continued to evolve, and by mid-2015, the stable version of Kubernetes, version 1.0, was released. This release represented a significant step forward in the maturity and stability of Kubernetes, making it accessible to a broader audience for container orchestration.
+The **year 2016** marked a turning point for Kubernetes as it transitioned into the mainstream. During this period, auxiliary tools such as **kubeadm,** **Kops** and **Minikube** began emerging. These tools played a crucial role in simplifying the process of creating and configuring Kubernetes clusters, contributing to the broader adoption and accessibility of Kubernetes in various deployment scenarios.
 
-Furthermore, Google established a partnership with the Cloud Native Computing Foundation (CNCF), leading to the project's management falling under the purview of CNCF. This partnership solidified the commitment to fostering open-source collaboration and innovation within the Kubernetes ecosystem.
+In **late 2016,** a pivotal case study emerged from Pokémon Go, instilling greater confidence in utilizing Kubernetes for production environments. This real-world example showcased the platform's robustness and reliability.
 
-The CNCF, in addition to managing the project, offers certifications and training programs for Kubernetes. This initiative serves to standardize knowledge and proficiency in Kubernetes across the industry.
-
-The year 2016 marked a turning point for Kubernetes as it transitioned into the mainstream. During this period, auxiliary tools such as Kops and Minikube began emerging. These tools played a crucial role in simplifying the process of creating and configuring Kubernetes clusters, contributing to the broader adoption and accessibility of Kubernetes in various deployment scenarios.
-
-In late 2016, a pivotal case study emerged from Pokémon Go, instilling greater confidence in utilizing Kubernetes for production environments. This real-world example showcased the platform's robustness and reliability.
-
-Moving into 2017, significant strides in enterprise adoption of Kubernetes were witnessed. Google made a substantial contribution to this landscape, and IBM announced the Istio controller for ingress controls, resembling an application load balancer in functionality. GitHub made a noteworthy transition to running on Kubernetes, underlining the platform's suitability for large-scale and critical applications. In a symbolic move, Oracle joined the Cloud Native Computing Foundation (CNCF), aligning with the broader Kubernetes community.
+Moving into **2017,** significant strides in enterprise adoption of Kubernetes were witnessed. **Google** made a substantial contribution to this landscape, and **IBM** announced the Istio controller for ingress controls, resembling an application load balancer in functionality. **GitHub** made a noteworthy transition to running on Kubernetes, underlining the platform's suitability for large-scale and critical applications. In a symbolic move, **Oracle** joined the **Cloud Native Computing Foundation (CNCF),** aligning with the broader Kubernetes community.
 
 Reflecting on these milestones, it might seem as though these events transpired in a distant past, but it's essential to acknowledge that we're referring to the year 2017—a relatively recent timeframe in the fast-evolving world of container orchestration and cloud-native technologies.
 
-It's been just three years—not even a complete three years yet. Despite its relatively short existence, Kubernetes has rapidly matured into a robust platform, and its integration into Google's operations underscores its reliability. Google, a pioneer in the tech industry, has been leveraging Kubernetes for decades, attesting to its enduring utility and effectiveness.
+Despite its relatively short existence, Kubernetes has rapidly matured into a robust platform, and its integration into Google's operations underscores its reliability. Google, a pioneer in the tech industry, has been leveraging Kubernetes for decades, attesting to its enduring utility and effectiveness.
 
 Beyond the formidable Google infrastructure, Kubernetes offers a plethora of remarkable features. It's important to clarify that Kubernetes isn't a direct replacement for the Docker engine; instead, it excels at managing clusters of Docker engines. Moreover, Kubernetes is versatile enough to extend its capabilities beyond Docker and can seamlessly manage clusters of other container runtime environments, such as Rocket. This flexibility and inclusivity contribute to the broad appeal and adoption of Kubernetes across diverse containerized environments.
 
-Indeed, Kubernetes boasts an array of impressive features.
+### Kubernetes boasts an array of impressive features.
 
-Service discovery and load balancing are seamlessly integrated into Kubernetes. When you create a container, referred to as a "pod" in this context, it is automatically discovered by the load balancer, and any updates to the load balancer are handled seamlessly. This dynamic interaction ensures efficient service discovery and load distribution within the cluster.
+- **Service discovery and load balancing** are seamlessly integrated into Kubernetes. When you create a container, referred to as a "pod" in this context, it is automatically discovered by the load balancer, and any updates to the load balancer are handled seamlessly. This dynamic interaction ensures efficient service discovery and load distribution within the cluster.
 
-One notable aspect is storage orchestration. Kubernetes provides seamless integration with a variety of storage solutions, including SAN, NAS, and even cloud-based solutions like EBS volumes and Ceph storage. The extensive list of supported storage options contributes to a robust and flexible storage orchestration environment within Kubernetes.
+- **Storage orchestration** Kubernetes provides seamless integration with a variety of storage solutions, including Storage Area Network(SAN), Network-Attached Storage(NAS), and even cloud-based solutions like EBS volumes and Ceph storage. The extensive list of supported storage options contributes to a robust and flexible storage orchestration environment within Kubernetes. As a result of these capabilities, confidence in running stateful containers has grown substantially. 
 
-As a result of these capabilities, confidence in running stateful containers has grown substantially. Kubernetes empowers users to manage both stateless and stateful applications with equal ease, making it a versatile and reliable platform for a wide range of containerized workloads.
+- **Automated rollouts and rollbacks** Kubernetes makes it effortlessly simple to deploy a new image version and equally easy to roll back in case the update proves problematic. This process, akin to what we do in AWS Elastic Beanstalk, but at a faster pace, ensuring a swift and efficient deployment lifecycle.
 
-Now, let's delve into some of the remarkable features of Kubernetes.
+- **Automatic bin packing** It intelligently places your containers on the most suitable node, ensuring optimal resource utilization based on the specified requirements. This meticulous allocation of resources contributes to the efficient utilization of computing resources.
 
-One of its standout capabilities is Automated Rollback. Kubernetes makes it effortlessly simple to deploy a new image version and equally easy to roll back in case the update proves problematic. This process, akin to what we do in Beanstalk, is executed at a faster pace, ensuring a swift and efficient deployment lifecycle.
+- **Self-healing** If a node becomes unavailable. It promptly resurrects your containers on a live node, ensuring continuous operation in the event of a node failure. Additionally, containers are actively monitored, allowing for proactive management similar to the Auto Scaling group in other environments. In the event of an instance failure, the Auto Scaling group launches a replacement, showcasing the self-healing capability, which operates even faster than traditional Auto Scaling groups.
 
-Kubernetes excels in Automatic Bin Packing. It intelligently places your containers on the most suitable node, ensuring optimal resource utilization based on the specified requirements. This meticulous allocation of resources contributes to the efficient utilization of computing resources.
+- **Secret and configuration management** Kubernetes provides robust configuration management capabilities, allowing you to handle configurations in the form of variables, volumes, and encoded secrets. These encoded secrets add an extra layer of security to sensitive information.
 
-The Self-Healing on Node feature, as previously discussed in orchestration tools, kicks into action if a node becomes unavailable. It promptly resurrects your containers on a live node, ensuring continuous operation in the event of a node failure. Additionally, containers are actively monitored, allowing for proactive management similar to the Auto Scaling group in other environments. In the event of an instance failure, the Auto Scaling group launches a replacement, showcasing the self-healing capability, which operates even faster than traditional Auto Scaling groups.
+- **Batch Execution**: Kubernetes can manage not only services but also your batch and CI workloads. It has the capability to replace failing containers if desired.
 
-Kubernetes provides robust configuration management capabilities, allowing you to handle configurations in the form of variables, volumes, and encoded secrets. These encoded secrets add an extra layer of security to sensitive information.
+- **Horizontal Scaling**: Easily scale your application up and down using a simple command, a UI, or automatically based on CPU usage.
 
-While there are many more features to explore, these are some of the standout functionalities of Kubernetes. For a more comprehensive understanding, you can refer to the Kubernetes documentation, which provides a detailed overview of the platform's capabilities. We will also navigate through the documentation in the upcoming sections to gain a deeper insight into Kubernetes.
+- **IPv4/IPv6 Dual-Stack**: Kubernetes supports the allocation of both IPv4 and IPv6 addresses to Pods and Services.
 
-Let's explore the architecture of Kubernetes, which involves several services working together to form the complete cluster.
+- **Designed for Extensibility**: Extend the features of your Kubernetes cluster without the need to modify upstream source code.
 
-At its core, Kubernetes comprises two main components: the master node and the worker node. Worker nodes host the Docker engines, while the master node manages these worker nodes. Notably, you don't interact directly with the worker nodes to run containers; instead, you communicate your instructions to the master node.
+While there are many more features to explore, these are some of the standout functionalities of Kubernetes. For a more comprehensive understanding, you can refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) which provides a detailed overview of the platform's capabilities. 
 
-Access to the master node doesn't involve direct logins. Instead, you connect to it using a client, providing information about the containers you wish to run. The master node, also referred to as the control plane, takes actions based on these instructions.
+### Architecture of Kubernetes
+Involves several services working together to form the complete cluster.
 
-Within the master node or control plane, four essential services are at play:
-
-API Server: Acts as a communication hub, processing requests and managing the cluster state.
-Scheduler: Determines which worker node should run a new pod based on resource requirements and constraints.
-Controller Manager: Ensures that the desired state of the cluster matches the actual state, handling node failures and replication.
-etcd: A distributed key-value store that stores the configuration data of the cluster.
-Beyond these fundamental services, additional services and add-ons can be incorporated into the master node.
-
-On the worker node, three critical services operate:
-
-kubelet: Ensures that containers are running in a Pod.
-kube-proxy: Maintains network rules on nodes, facilitating communication between pods and external network traffic.
-Docker Engine: Executes and manages containers on the worker node.
-In upcoming sections, we'll delve into each of these services to gain a comprehensive understanding of the Kubernetes architecture.
-
-# Understanding Kubernetes Architecture
-
-## Introduction
-
-In the realm of Kubernetes, the architecture involves multiple services working together to create a robust cluster. Let's explore the key components and their functionalities.
-
-## Components
-
-### Master Node and Worker Node
+![]()
 
 At its core, Kubernetes comprises two main components:
 
 - **Master Node:** Manages worker nodes, where Docker engines run.
 - **Worker Node:** Hosts Docker engines and executes containers.
+Notably, you don't interact directly with the worker nodes to run containers; instead, you communicate your instructions to the master node.
 
-### Interaction Model
+Access to the master node doesn't involve direct logins. Instead, you connect to it using a client, providing information about the containers you wish to run. The master node, also referred to as the **control plane**, takes actions based on these instructions.
 
-- You don't directly log into worker nodes to run containers; instructions are communicated to the master node.
-- Access to the master node, also known as the control plane, doesn't involve direct logins; instead, you connect to it using a client.
-
-### Control Plane (Master Node) Services
-
-The control plane, or master node, consists of several key services:
+#### Within the master node or control plane, four essential services are at play:
 
 1. **API Server:** Acts as a communication hub, processing requests and managing the cluster state.
+
 2. **Scheduler:** Determines which worker node should run a new pod based on resource requirements and constraints.
+  
 3. **Controller Manager:** Ensures that the desired state of the cluster matches the actual state, handling node failures and replication.
+  
 4. **etcd:** A distributed key-value store that stores the configuration data of the cluster.
 
-Additional services and add-ons can be incorporated into the master node.
+Beyond these fundamental services, additional services and add-ons can be incorporated into the master node.
 
-### Worker Node Services
-
-On the worker node, three essential services operate:
+#### On the worker node, three critical services operate:
 
 1. **kubelet:** Ensures that containers are running in a Pod.
+
 2. **kube-proxy:** Maintains network rules on nodes, facilitating communication between pods and external network traffic.
+
 3. **Docker Engine:** Executes and manages containers on the worker node.
 
-## Conclusion
+In upcoming sections, we'll delve into each of these services to gain a comprehensive understanding of the Kubernetes architecture.
 
-This brief overview introduces the foundational components of Kubernetes architecture. In subsequent sections, we'll delve into each service, gaining a deeper understanding of their roles and functionalities.
 
 # Understanding Kubernetes Control Plane Components
 
@@ -160,12 +133,6 @@ The **Kube API Server** serves as the linchpin of the control plane, acting as t
 The second component on the master node is **etcd**, a key-value store designed for storing the critical information of the Kubernetes cluster. The Kube API Server interacts with etcd, storing and retrieving cluster information. Etcd contains runtime details, and it is crucial to regularly back up this data. In the event of a failure, losing etcd data results in the loss of current cluster state information. Etcd essentially stores the real-time state of everything within the cluster, making it a fundamental element for Kubernetes operations.
 
 These two components, the Kube API Server and etcd, form the backbone of the control plane, orchestrating the communication, coordination, and storage essential for the effective functioning of a Kubernetes cluster.
-
-# Understanding Kubernetes Control Plane Components (Continued)
-
-## Control Plane Components on the Master Node
-
-Let's continue exploring the key components residing on the master node, crucial for the orchestration of a Kubernetes cluster.
 
 ### 3. Scheduler
 
